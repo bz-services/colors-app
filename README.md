@@ -1,6 +1,6 @@
 # colors-app
 
-This project is a simple Flask application that only shows a colored web page. Below are the steps to get started with Docker.
+This project is a simple Flask application that renders a webpage with a background color. Below are the steps to get started with Docker.
 
 ## Prerequisites
 
