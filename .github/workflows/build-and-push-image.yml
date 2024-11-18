@@ -1,0 +1,42 @@
+name: Build and Push Docker Image to ECR
+
+on:
+  workflow_call:
+    inputs:
+      ROLE_ARN:
+        required: true
+        type: string
+      AWS_REGION:
+        type: string
+        default: 'eu-central-1'
+      IMAGE_REPO:
+        type: string
+        default: 'bz-app'
+      AWS_ACCOUNT_NUMBER:
+        required: true
+        type: string
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git Clone Repository
+      uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ inputs.ROLE_ARN }}
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ inputs.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build and Push Docker Image to Amazon ECR
+      env:
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        docker build -t ${{ inputs.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com/${{ inputs.IMAGE_REPO }}:${GITHUB_SHA::7}
+        docker push ${{ inputs.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com/${{ inputs.IMAGE_REPO }}:${GITHUB_SHA::7}
