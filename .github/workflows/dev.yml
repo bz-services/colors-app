@@ -1,0 +1,24 @@
+name: CICD for Colors App
+
+on:
+  push:
+    branches:
+      - '*'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  ci-dev:
+    uses: ./.github/workflows/ci-steps.yml
+    with:
+      AWS_ACCOUNT_NUMBER: '474668381992'
+      ROLE_ARN: 'arn:aws:iam::474668381992:role/GithubActionsForColorsApp'
+
+  cd-dev:
+    uses: ./.github/workflows/cd-steps.yml
+    needs: ci-dev
+    with:
+      AWS_ACCOUNT_NUMBER: '474668381992'
+      ROLE_ARN: 'arn:aws:iam::474668381992:role/GithubActionsForColorsApp'
