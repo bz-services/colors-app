@@ -24,14 +24,15 @@ To test the Docker image locally, run the following command:
 docker run -d -p 5000:5000 app:v1
 ```
 
-## GitHub Actions: Build and Push to Amazon ECR
+## GitHub Actions: Build, Push Docker Image to ECR, and Terraform Validation
 
-This project uses GitHub Actions for Continuous Integration (CI) to automate the process of building a Docker image and pushing it to Amazon Elastic Container Registry (ECR).
+This repository uses GitHub Actions to automate the following processes:
+
+1. **Build and push Docker image to Amazon ECR**
+2. **Run Terraform `fmt` and `validate`**
 
 ### Workflow Overview
-The GitHub Actions pipeline is defined in `.github/workflows/ci.yml`. It contains the following steps:
+The CI/CD pipeline is defined in `.github/workflows/ci-steps.yml` and consists of two jobs:
 
-1. **Checkout code** - The workflow checks out the latest code from the repository.
-2. **Log in to Amazon ECR** - The workflow authenticates with ECR using AWS credentials.
-3. **Build Docker Image** - The Docker image is built from the Dockerfile in the repository.
-4. **Push the image to ECR** - The Docker image is pushed to the specified Amazon ECR repository.
+1. **Build and Push Docker Image to ECR**: Builds a Docker image from the repository's `Dockerfile` and pushes it to Amazon ECR.
+2. **Terraform fmt and validate**: Ensures that the Terraform configuration files are properly formatted and valid.
