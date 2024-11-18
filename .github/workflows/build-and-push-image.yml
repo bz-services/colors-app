@@ -38,5 +38,5 @@ jobs:
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t ${{ inputs.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com/${{ inputs.IMAGE_REPO }}:${GITHUB_SHA::7}
+        docker build . -t ${{ inputs.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com/${{ inputs.IMAGE_REPO }}:${GITHUB_SHA::7}
         docker push ${{ inputs.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ inputs.AWS_REGION }}.amazonaws.com/${{ inputs.IMAGE_REPO }}:${GITHUB_SHA::7}
