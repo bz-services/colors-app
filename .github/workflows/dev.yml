@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - '*'
-  pull_request:
-    branches:
-      - '*'
 
 permissions:
   id-token: write
@@ -21,6 +18,7 @@ jobs:
 
   cd-dev:
     uses: ./.github/workflows/cd-steps.yml
+    needs: ci-dev
     with:
       AWS_ACCOUNT_NUMBER: '474668381992'
       ROLE_ARN: 'arn:aws:iam::474668381992:role/GithubActionsForColorsApp'
