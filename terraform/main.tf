@@ -37,9 +37,9 @@ module "ecs" {
   container_port       = 5000
 
   # VPC and Security Groups
-  vpc_id          = module.network.vpc_id
-  subnets         = module.network.public_subnet_ids
-  security_groups = [module.network.bz_security_group_id]
-  lb_security_groups    = [module.network.lb_security_group_id]
-  desired_count = 2
+  vpc_id             = module.network.vpc_id
+  subnets            = module.network.public_subnet_ids
+  security_groups    = [module.network.bz_security_group_id]
+  lb_security_groups = [module.network.lb_security_group_id]
+  desired_count      = 2
 }
