@@ -16,6 +16,9 @@ on:
 jobs:
   tf-plan:
     runs-on: ubuntu-latest 
+    defaults:
+      run:
+        working-directory: ./terraform
     steps:
     - name: Git Clone Repository
       uses: actions/checkout@v4
@@ -47,9 +50,12 @@ jobs:
   tf-apply:
     runs-on: ubuntu-latest
     needs: tf-plan
+    defaults:
+      run:
+        working-directory: ./terraform
     environment:
       name: dev
- 
+      
     steps:
     - name: Git Clone Repository
       uses: actions/checkout@v4

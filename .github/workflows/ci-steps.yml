@@ -47,6 +47,9 @@ jobs:
 
   tf-fmt-and-validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
     steps:
     - name: Git Clone Repository
       uses: actions/checkout@v4
