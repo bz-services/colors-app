@@ -35,7 +35,7 @@ module "ecs" {
   container_memory     = 512
   container_cpu        = 256
   container_port       = 5000
-
+  image_tag            = var.image_tag
   # VPC and Security Groups
   vpc_id             = module.network.vpc_id
   subnets            = module.network.public_subnet_ids

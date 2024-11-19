@@ -41,7 +41,7 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform plan -no-color -out=tfplan
+      run: terraform plan -no-color -out=tfplan -var "image_tag=${GITHUB_SHA::7}"
 
     - name: Upload Terraform Plan for Approval
       uses: actions/upload-artifact@v4
@@ -84,4 +84,4 @@ jobs:
 
     - name: Apply Terraform Plan
       working-directory: ./terraform
-      run: terraform apply ../tfplan
+      run: terraform apply ../tfplan 
