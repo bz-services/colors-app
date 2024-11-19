@@ -54,6 +54,13 @@ jobs:
     - name: Git Clone Repository
       uses: actions/checkout@v4
 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ inputs.ROLE_ARN }}
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ inputs.AWS_REGION }}
+
     - name: Setup Terraform with specified version on the runner
       uses: hashicorp/setup-terraform@v3
       with:
