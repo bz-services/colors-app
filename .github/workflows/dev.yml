@@ -1,9 +1,6 @@
 name: CICD for Colors App
 
-on:
-  push:
-    branches:
-      - '*'
+on: [push]
 
 permissions:
   id-token: write
@@ -18,6 +15,7 @@ jobs:
 
   cd-dev:
     uses: ./.github/workflows/cd-steps.yml
+    if: github.ref == 'refs/heads/main'
     needs: ci-dev
     with:
       AWS_ACCOUNT_NUMBER: '474668381992'
