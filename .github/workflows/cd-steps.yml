@@ -84,4 +84,4 @@ jobs:
 
     - name: Apply Terraform Plan
       working-directory: ./terraform
-      run: terraform apply ../tfplan
+      run: terraform apply ../tfplan -var image_tag=${GITHUB_SHA::7}

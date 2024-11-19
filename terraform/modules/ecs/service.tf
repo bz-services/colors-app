@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "bz_taskdef" {
 
   container_definitions = jsonencode([{
     name      = var.container_name
-    image     = "${aws_ecr_repository.bz_ecr.repository_url}:${var.image_tag}"
+    image     = "${data.aws_ecr_repository.bz_ecr.repository_url}:${var.image_tag}"
     essential = true
     memory    = var.container_memory
     cpu       = var.container_cpu
